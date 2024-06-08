@@ -29,53 +29,122 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="{{route('KelolaJabatan')}}" class="nav-link active">
-              <i class="fas fa-briefcase nav-icon"></i>
+          <li class="nav-item menu-close">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
               <p>
-                Kelola Jabatan
+                Kelola Karyawan
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('KelolaKaryawan')}}" class="nav-link">
+                  <i class="fas fa-user-tie nav-icon"></i>
+                  <p>
+                    Data Karyawan
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('KelolaJabatan')}}" class="nav-link">
+                  <i class="fas fa-briefcase nav-icon"></i>
+                  <p>
+                    Data Jabatan
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('AbsensiKaryawan')}}" class="nav-link">
+                 <i class="fas fa-paste nav-icon"></i>
+                  <p>Absensi Karyawan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('KelolaGaji')}}" class="nav-link">
+                  <i class="fas fa-money-check-alt nav-icon"></i>
+                  <p>Gaji Karyawan</p>
+                </a>
+              </li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a href="{{route('KelolaKaryawan')}}" class="nav-link">
-              <i class="fas fa-user-tie nav-icon"></i>
-              <p>
-                Kelola Data Karyawan
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{route('KelolaKursus')}}" class="nav-link">
-              <i class="fas fa-scroll nav-icon"></i>
-              <p>
-                Kelola Kursus
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{route('KelolaInstruktur')}}" class="nav-link">
-              <i class="fas fa-user-friends nav-icon"></i>
-              <p>
-                Kelola Instruktur
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{route('KelolaSiswa')}}" class="nav-link">
-              <i class="fas fa-users-cog nav-icon"></i>
+          <li class="nav-item menu-close">
+            <a href="#" class="nav-link">
+              <i class=" nav-icon fas fa-users"></i>
               <p>
                 Kelola Siswa
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('KelolaSiswa')}}" class="nav-link">
+                  <i class="fas fa-users-cog nav-icon"></i>
+                  <p>
+                    Data Siswa
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('KelolaSiswaKursus')}}" class="nav-link">
+                  <i class="fas fa-code-branch nav-icon"></i>
+                  <p>
+                    Kursus Siswa
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('KelolaJadwal')}}" class="nav-link">
+                <i class="fas fa-calendar-alt nav-icon"></i>
+                  <p>
+                    Jadwal Siswa
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('KelolaAbsensi')}}" class="nav-link">
+                <i class="fas fa-book-reader nav-icon"></i>
+                  <p>
+                    Absensi Siswa
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('KelolaSPP')}}" class="nav-link">
+                <i class="fas fa-wallet nav-icon"></i>
+                  <p>
+                    SPP Siswa
+                  </p>
+                </a>
+              </li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a href="{{route('KelolaSiswaKursus')}}" class="nav-link">
-              <i class="fas fa-code-branch nav-icon"></i>
+          <li class="nav-item menu-close">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fab fa-pied-piper-square"></i>
               <p>
-                Kelola Siswa Kursus
+                Kelola Kursus
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('KelolaKursus')}}" class="nav-link">
+                  <i class="fas fa-scroll nav-icon"></i>
+                  <p>
+                    Data Kursus
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('KelolaInstruktur')}}" class="nav-link">
+                  <i class="fas fa-user-friends nav-icon"></i>
+                  <p>
+                    Data Instruktur
+                  </p>
+                </a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>

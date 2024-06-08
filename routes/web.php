@@ -4,6 +4,7 @@
 use App\Http\Controllers\AbsensiKaryawanController;
 use App\Http\Controllers\AbsensiSiswaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GajiKaryawanController;
 use App\Http\Controllers\HomeControler;
 use App\Http\Controllers\InstrukturController;
 use App\Http\Controllers\JadwalSiswaController;
@@ -42,6 +43,8 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/admin', [AuthController::class, 'admin'])->name('admin')->middleware('userAccess:admin');
         Route::get('/operator', [AuthController::class, 'operator'])->name('operator')->middleware('userAccess:operator');
         Route::get('/calonsiswa', [AuthController::class, 'calonsiswa'])->name('calonsiswa')->middleware('userAccess:calonsiswa');
+        Route::get('/guru/123', [AuthController::class, 'guru'])->name('guru')->middleware('userAccess:guru');
+        Route::get('/orangtua', [AuthController::class, 'orangtua'])->name('orangtua')->middleware('userAccess:orantua');
 
         Route::get('/kuis/sederhana', [KuisController::class, 'kuis'])->name('Quiz')->middleware('userAccess:siswa');
         Route::get('/siswa', [AuthController::class, 'siswa'])->name('siswa')->middleware('userAccess:siswa');
@@ -130,10 +133,14 @@ Route::middleware(['auth'])->group(function(){
         Route::put('/operator/sppsiswa/update/{id}', [PembayaranSppController::class, 'update'])->name('SppUpdate')->middleware('userAccess:operator');
         Route::delete('/operator/sppsiswa/delete/{id}', [PembayaranSppController::class, 'destroy'])->name('SppDelete')->middleware('userAccess:operator');
 
-        Route::get('/operator/absensikaryawan', [AbsensiKaryawanController::class, 'index'])->name('AbsensiKaryawan');
+        Route::get('/operator/absensikaryawan', [AbsensiKaryawanController::class, 'index'])->name('AbsensiKaryawan')->middleware('userAccess:operator');
         Route::post('/operator/absensikaryawan/store', [AbsensiKaryawanController::class, 'store'])->name('AbsensiKaryawanStore')->middleware('userAccess:operator');
         Route::put('/operator/absensikaryawan/update/{id}', [AbsensiKaryawanController::class, 'update'])->name('AbsensiKaryawanUpdate')->middleware('userAccess:operator');
         Route::delete('/operator/absensikaryawan/delete/{id}', [AbsensiKaryawanController::class, 'destroy'])->name('AbsensiKaryawanDelete')->middleware('userAccess:operator');
+
+        Route::get('/operator/gajikaryawan', [GajiKaryawanController::class, 'index'])->name('KelolaGaji')->middleware('userAccess:operator');
+        Route::post('/operator/gajikaryawan/store', [GajiKaryawanController::class, 'store'])->name('KelolaGajiStore')->middleware('userAccess:operator');
+        Route::delete('/operator/gajikaryawan/delete/{id}', [GajiKaryawanController::class, 'delete'])->name('KelolaGajiDelete')->middleware('userAccess:operator');
 });
 
 Route::get('/home', function() {

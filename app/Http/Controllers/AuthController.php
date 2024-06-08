@@ -18,15 +18,9 @@ class AuthController extends Controller
     {
         return view('poinAkses.owner.index');
     }
-    
-        public function guru()
-    {
-        return view('poinAkses.guru.index');
-    }
-    
         public function orangtua()
     {
-        return view('poinAkses.orangtua.index');
+        return view('poinAkses/orangtua/index');
     }
     
         public function siswa()
@@ -37,5 +31,9 @@ class AuthController extends Controller
         public function calonsiswa()
     {
         return view('poinAkses.calonsiswa.index');
+    }
+    public function guru()
+    {
+        return view('poinAkses.guru.index');
     }
 }

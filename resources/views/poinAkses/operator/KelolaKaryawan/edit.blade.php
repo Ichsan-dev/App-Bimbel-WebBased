@@ -39,7 +39,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('KelolaKaryawan')}}" class="nav-link active">
+                <a href="{{route('KelolaKaryawan')}}" class="nav-link">
                   <i class="fas fa-user-tie nav-icon"></i>
                   <p>
                     Data Karyawan
@@ -55,15 +55,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('SettingWebsite')}}" class="nav-link">
-                 <i class="fas fa-sliders-h nav-icon"></i>
-                  <p>Setting</p>
+                <a href="{{route('AbsensiKaryawan')}}" class="nav-link">
+                 <i class="fas fa-paste nav-icon"></i>
+                  <p>Absensi Karyawan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-user-clock nav-icon"></i>
-                  <p>Reviewer</p>
+                <a href="{{route('KelolaGaji')}}" class="nav-link">
+                  <i class="fas fa-money-check-alt nav-icon"></i>
+                  <p>Gaji Karyawan</p>
                 </a>
               </li>
             </ul>

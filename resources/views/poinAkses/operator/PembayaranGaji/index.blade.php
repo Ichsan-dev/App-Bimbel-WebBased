@@ -1,5 +1,8 @@
 @extends('Layout-Dashboard.main')
 @section('sksd')
+          <div class="col-sm-6">
+            <h1>Selamat Datang di Halaman Gaji Karyawan :)</h1>
+          </div><!-- /.col -->
 @endsection
 @section('NavAccount')
 
@@ -162,33 +165,36 @@
             <div class="card">
             <div class="card-header" style="display: flex; justify-content: space-between; align-items:center;">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-create"><i class="fas fa-plus-square"></i></button>
-                <h3 class="card-title" style="margin-bottom: 0;"><b>Tabel Pembayaran SPP Siswa</b></h3>
+                <h3 class="card-title" style="margin-bottom: 0;"><b>Tabel Gaji Karyawan</b></h3>
             </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table class="table table-bordered">
                   <thead>
-                    <tr style="text-align: center; background-color:rgb(251, 255, 5);color:rgb(0, 0, 0)">
+                    <tr style="text-align: center; background-color:rgb(195, 196, 149);color:rgb(0, 0, 0)">
                       <th>#</th>
-                      <th>Nama Siswa</th>
+                      <th>Nama Karyawan</th>
                       <th>Tanggal</th>
                       <th>Bulan</th>
-                      <th>Status</th>
-                      <th>Keterangan</th>
+                      <th>Gaji Pokok</th>
+                      <th>Tj Makan</th>
+                      <th>Tj Transport</th>
+                      <th>Total Gaji</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($dataSPP as $item)                          
+                    @foreach ($dataGajiKaryawan as $item)                          
                     <tr>
-                        <td>{{ $loop->iteration}}</td>
-                        <td>{{$item->siswa->nama}}</td>
-                        <td>{{$item->tanggal_pembayaran}}</td>
-                        <td>{{$item->bulan_pembayaran}}</td>
-                        <td>{{$item->status_pembayaran}}</td>
-                        <td>{{$item->keterangan}}</td>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$item->karyawan->nama}}</td>
+                        <td>{{$item->tanggal}}</td>
+                        <td>{{$item->bulan}}</td>
+                        <td>{{$item->gaji_pokok}}</td>
+                        <td>{{$item->tunjangan_makan}}</td>
+                        <td>{{$item->tunjangan_transport}}</td>
+                        <td>{{$item->total_gaji}}</td>
                         <td style="Display: flex; justify-content: center; align-items:center; border: none;">
-                                <a data-toggle="modal" data-target="#modal-edit{{$item->id}}" class="btn-sm btn-warning mr-2"><i class="fas fa-pen mr-1"></i></a>
                                 <a data-toggle="modal" data-target="#modal-hapus{{ $item->id }}" class="btn-sm btn-danger"><i class="fas fa-trash-alt mr-1"></i></a>
                         </td>
                     </tr>
@@ -203,10 +209,10 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
-                                  <p>Apakah yakin ingin menghapus data spp <b>{{$item->siswa->nama}}</b>?</p>
+                                  <p>Apakah yakin ingin menghapus data gaji <b>{{$item->karyawan->nama_karyawan}}</b>?</p>
                                 </div>
                                 <div class="modal-footer" style="display: flex; justify-content: flex-end;">
-                                  <form action="{{route('SppDelete', ['id' => $item->id])}}" method="POST">
+                                  <form action="{{route('KelolaGajiDelete', ['id' => $item->id])}}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
@@ -219,82 +225,7 @@
                             <!-- /.modal-dialog -->
                   </div>
                 <!-- Modal Hapus-->
-                <!-- Modal Edit-->
-                  <div class="modal fade" id="modal-edit{{$item->id}}">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Edit Data Spp Siswa</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <form action="{{route('SppUpdate', ['id' => $item->id])}}" method="POST" enctype="multipart/form-data"> 
-                                            @csrf
-                                            @method('PUT')
-                                        <div class="modal-body">
-                                          <div class="form-group">
-                                            <label for="exampleInputSiswa">Nama Siswa</label>
-                                            <select name="nama_siswa" class="form-control" id="nama_siswa">
-                                              <option disabled value="">-- Pilih Siswa --</option>
-                                                <option value="{{$item->siswa_id}}">{{$item->siswa->nama}}</option>
-                                                @foreach($datasiswa as $ds)
-                                                  <option value="{{ $ds->id }}">{{ $ds->nama }}</option>
-                                                @endforeach
-                                              </select>
-                                            </select>
-                                          </div>
-                                          <div class="form-group">
-                                            <label for="exampleInputTanggal">Tanggal</label>
-                                            <input type="date" class="form-control" id="tanggal" placeholder="dd-mm-yyyy" name="tanggal" value="{{$item->tanggal_pembayaran}}">
-                                              @error('tanggal')
-                                                <small>{{ $message }}</small>
-                                              @enderror
-                                          </div>
-                                          <div class="form-group">
-                                            <label for="exampleInputBulan_Pembayaran">Bulan</label>
-                                              <select id="bulan" class="form-control" name="bulan" >
-                                                <option disabled value="">-- Pilih --</option>
-                                                <option value="Januari" {{$item->bulan_pembayaran == 'Januari' ? 'selected' : ''}}>Januari</option>
-                                                <option value="Februari" {{$item->bulan_pembayaran == 'Februari' ? 'selected' : ''}}>Februari</option>
-                                                <option value="Maret"{{$item->bulan_pembayaran == 'Maret' ? 'selected' : ''}}>Maret</option>
-                                                <option value="April" {{$item->bulan_pembayaran == 'April' ? 'selected' : ''}}>April</option>
-                                                <option value="Mei" {{$item->bulan_pembayaran == 'Mei' ? 'selected' : ''}}>Mei</option>
-                                                <option value="Juni" {{$item->bulan_pembayaran == 'Juni' ? 'selected' : ''}}>Juni</option>
-                                                <option value="Juli" {{$item->bulan_pembayaran == 'Juli' ? 'selected' : ''}}>Juli</option>
-                                                <option value="Agustus" {{ $item->bulan_pembayaran == 'Agustus' ? 'selected' : '' }}>Agustus</option>
-                                                <option value="September" {{ $item->bulan_pembayaran == 'September' ? 'selected' : '' }}>September</option>
-                                                <option value="Oktober" {{ $item->bulan_pembayaran == 'Oktober' ? 'selected' : '' }}>Oktober</option>
-                                                <option value="November" {{ $item->bulan_pembayaran == 'November' ? 'selected' : '' }}>November</option>
-                                                <option value="Desember" {{ $item->bulan_pembayaran == 'Desember' ? 'selected' : '' }}>Desember</option>
-                                              </select>
-                                          </div>
-                                          <div class="form-group">
-                                            <label for="exampleinputstatus">Status Pembayaran</label>
-                                            <select name="status" id="" class="form-control" >
-                                              <option value="Lunas" {{ $item->status == 'lunas' ? 'selected' : '' }}>Lunas</option>
-                                              <option value="Belum-Lunas" {{ $item->status == 'belum-lunas' ? 'selected' : '' }}>Belum Lunas</option>
-                                            </select>
-                                          </div>
-                                          <div class="form-group">
-                                              <label for="exampleInputKeterangan">Keterangan</label>
-                                              <input type="text" class="form-control" id="Keterangan" placeholder="" name="keterangan" value="{{$item->keterangan}}">
-                                          </div>
-                                      </div>
-                                        <div class="modal-footer" style="display: flex; justify-content: flex-end;">
-                                            
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                                                <button type="submit" class="btn btn-success">Simpan</button>
-                                            
-                                        </div>
-                                    </form>
-                              </div>
-                              <!-- /.modal-content -->
-                            </div>
-                            <!-- /.modal-dialog -->
-                  </div>
                          @endforeach
-                <!-- Modal Edit-->
                   </tbody>
                 </table>
               </div>
@@ -306,20 +237,20 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data SPP Siswa</h4>
+                    <h4 class="modal-title">Tambah Data Gaji</h4>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                 </div>
-                  <form action="{{route('SppStore')}}" method="POST" enctype="multipart/form-data"> 
+                  <form action="{{route('KelolaGajiStore')}}" method="POST" enctype="multipart/form-data"> 
                     @csrf
                     <div class="modal-body">
                       <div class="form-group">
-                        <label for="exampleInputSiswa">Nama Siswa</label>
-                        <select name="nama_siswa" class="form-control" id="nama_siswa">
-                          <option disabled value="">-- Pilih Siswa --</option>
-                            @foreach($datasiswa as $siswa)
-                              <option value="{{ $siswa->id }}">{{ $siswa->nama }}</option>
+                        <label for="exampleInputSiswa">Nama Karyawan</label>
+                        <select name="nama_karyawan" class="form-control" id="nama_karyawan">
+                          <option disabled value="">-- Pilih Karyawan --</option>
+                            @foreach($datakaryawan as $k)
+                              <option value="{{ $k->id }}">{{ $k->nama }}</option>
                             @endforeach
                         </select>
                       </div>
@@ -347,17 +278,6 @@
                             <option value="November">November</option>
                             <option value="Desember">Desember</option>
                           </select>
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleinputstatus">Status Pembayaran</label>
-                        <select name="status" id="" class="form-control" >
-                          <option value="Lunas">Lunas</option>
-                          <option value="Belum-Lunas">Belum Lunas</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                          <label for="exampleInputKeterangan">Keterangan</label>
-                          <input type="text" class="form-control" id="Keterangan" placeholder="" name="keterangan" value="">
                       </div>
                     </div>
                     <div class="modal-footer" style="display: flex; justify-content: flex-end;">

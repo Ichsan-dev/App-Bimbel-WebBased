@@ -29,7 +29,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
+          <li class="nav-item menu-close">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -47,7 +47,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('KelolaJabatan')}}" class="nav-link active">
+                <a href="{{route('KelolaJabatan')}}" class="nav-link">
                   <i class="fas fa-briefcase nav-icon"></i>
                   <p>
                     Data Jabatan
@@ -55,15 +55,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('SettingWebsite')}}" class="nav-link">
-                 <i class="fas fa-sliders-h nav-icon"></i>
-                  <p>Setting</p>
+                <a href="{{route('AbsensiKaryawan')}}" class="nav-link">
+                 <i class="fas fa-paste nav-icon"></i>
+                  <p>Absensi Karyawan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-user-clock nav-icon"></i>
-                  <p>Reviewer</p>
+                <a href="{{route('KelolaGaji')}}" class="nav-link">
+                  <i class="fas fa-money-check-alt nav-icon"></i>
+                  <p>Gaji Karyawan</p>
                 </a>
               </li>
             </ul>
