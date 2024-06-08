@@ -131,5 +131,6 @@
 <script src="{{asset('AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('AdminLTE/dist/js/adminlte.min.js')}}"></script>
+<script src="{{asset('master-quiz/index.js')}}"></script>
 </body>
 </html>
