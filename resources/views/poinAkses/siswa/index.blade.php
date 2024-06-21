@@ -10,9 +10,9 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
+        {{-- <div class="image">
+          <img src="" class="img-circle elevation-2" alt="User Image">
+        </div> --}}
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name}}</a>
         </div>
@@ -34,47 +34,19 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+          <li class="nav-item">
+            <a href="{{route('cekjadwal')}}" class="nav-link">
+             <i class="fas fa-calendar-alt nav-icon"></i>
               <p>
-                Kelola Website
-                <i class="right fas fa-angle-left"></i>
+                Jadwal Les
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-chalkboard nav-icon"></i>
-                  <p>Jumbotron</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('SectionWebsite')}}" class="nav-link">
-                  <i class="fas fa-window-restore nav-icon"></i>
-                  <p>Section</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                 <i class="fas fa-sliders-h nav-icon"></i>
-                  <p>Setting</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-user-clock nav-icon"></i>
-                  <p>Reviewer</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
-            <a href="{{route('KelolaKuis')}}" class="nav-link">
-              <i class="fas fa-scroll nav-icon"></i>
+            <a href="{{route('cekabsen')}}" class="nav-link">
+             <i class="far fa-address-book nav-icon"></i>
               <p>
-                Kelola Kuis
-                <span class="right badge badge-danger">New</span>
+                Absensi Les
               </p>
             </a>
           </li>
@@ -92,4 +64,20 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+@endsection
+@section('navlink')
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="/" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{route('siswa')}}" class="nav-link">Dashboard</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+          <a href="{{ route('logout') }}" class="nav-link" data-toggle="modal" data-target="#modal-logout">Logout</a>
+      </li>
+    </ul>
 @endsection

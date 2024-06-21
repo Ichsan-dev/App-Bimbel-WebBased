@@ -56,47 +56,11 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Kelola Website
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-chalkboard nav-icon"></i>
-                  <p>Jumbotron</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('SectionWebsite')}}" class="nav-link">
-                  <i class="fas fa-window-restore nav-icon"></i>
-                  <p>Section</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                 <i class="fas fa-sliders-h nav-icon"></i>
-                  <p>Setting</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-user-clock nav-icon"></i>
-                  <p>Reviewer</p>
-                </a>
-              </li>
-            </ul>
-          </li>
           <li class="nav-item">
-            <a href="{{route('KelolaKuis')}}" class="nav-link">
-              <i class="fas fa-scroll nav-icon"></i>
+            <a href="{{route('cekjadwal')}}" class="nav-link">
+             <i class="fas fa-calendar-alt nav-icon"></i>
               <p>
-                Kelola Kuis
-                <span class="right badge badge-danger">New</span>
+                Jadwal Les
               </p>
             </a>
           </li>

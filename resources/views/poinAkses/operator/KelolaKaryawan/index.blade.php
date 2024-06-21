@@ -29,7 +29,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-close">
+          <li class="nav-item menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -39,7 +39,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('KelolaKaryawan')}}" class="nav-link">
+                <a href="{{route('KelolaKaryawan')}}" class="nav-link active">
                   <i class="fas fa-user-tie nav-icon"></i>
                   <p>
                     Data Karyawan
@@ -153,6 +153,22 @@
     <!-- /.sidebar -->
   </aside>
 @endsection
+@section('navlink')
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="/" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{route('operator')}}" class="nav-link">Dashboard</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+          <a href="{{ route('logout') }}" class="nav-link" data-toggle="modal" data-target="#modal-logout">Logout</a>
+      </li>
+    </ul>
+@endsection
 @section('Content')
     <!-- Main content -->
     <div class="content">
@@ -194,7 +210,7 @@
         </div> --}}
         <div class="card-header" style="display: flex; justify-content:space-between; align-items:center;">
             <a href="{{Route('KaryawanCreate')}}" class="btn btn-primary">Tambah Data</a>
-            <h3 class="card-title" style="margin-bottom: 0;"><b>Employee Table</b></h3>
+            <h3 class="card-title" style="margin-bottom: 0;"><b>Tabel Karyawan</b></h3>
         </div>
               <!-- /.card-header -->
         <div class="card-body">
@@ -217,11 +233,12 @@
                         <td>{{$item->jabatan->nama_jabatan}}</td>
                         <td>{{$item->no_telp}}</td>
                         <td>{{$item->alamat}}</td>
-                        <td style="Display: flex; justify-content: flex-end; align-items:center; border: none;">
-                                <a href="{{ route('KaryawanEdit', ['id' => $item->id]) }}" class="btn-sm btn-warning mr-2">
-                                    <i class="fas fa-pen nav-icon"></i><span class="ml-2">Edit</span>
+                        <td style="Display: flex; justify-content:space-between; align-items:center; border: none;">
+                                <a href="{{ route('KaryawanEdit', ['id' => $item->id]) }}" class="btn-sm btn-warning">
+                                    <i class="fas fa-pen nav-icon"></i>
                                 </a>
-                                <a data-toggle="modal" data-target="#modal-hapus{{ $item->id }}" class="btn-sm btn-danger"><i class="fas fa-trash-alt mr-2"></i>Hapus</a>
+                                <a data-toggle="modal" data-target="#modal-hapus{{ $item->id }}" class="btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                <a data-toggle="modal" data-target="#modal-detail{{ $item->id }}" class="btn-sm btn-success"><i class="fas fa-eye"></i></i></a>
                         </td>
                       </tr>
                         <!-- Modal -->
@@ -250,7 +267,48 @@
                             </div>
                             <!-- /.modal-dialog -->
                           </div>
-                            <!-- Modal -->
+                        <!-- Modal -->
+                        <!-- Modal -->
+                            <div class="modal fade" id="modal-detail{{ $item->id}}">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h4 class="modal-title">Data Karyawan</h4>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <h3 class="profile-username text-center">{{$item->nama}}</h3>
+                                  <p class="text-muted text-center">{{$item->jabatan->nama_jabatan}}</p>
+                                  <ul class="list-group list-group-unbordered mb-3">
+                                    <li class="list-group-item">
+                                      <b>Email</b> <a class="float-right">{{$item->email}}</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                      <b>Nomer Handphone</b> <a class="float-right">{{$item->no_telp}}</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                      <b>Jenis Kelamin</b> <a class="float-right">{{$item->jk}}</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                      <b>Tanggal Lahir</b> <a class="float-right">{{$item->tanggal_lahir}}</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                      <b>Alamat</b> <a class="float-right">{{$item->alamat}}</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                      <b>Pendidikan</b> <a class="float-right">{{$item->pend_akhir}}</a>
+                                    </li>
+                                    
+                                  </ul>
+                                </div>
+                              </div>
+                              <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                          </div>
+                        <!-- Modal -->
                       @endforeach
                   </tbody>
             </table>

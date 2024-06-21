@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\karyawan;
 use App\Models\Jabatan;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class KaryawanController extends Controller
@@ -53,6 +55,14 @@ class KaryawanController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         }
 
+        // Create a new User account for the Siswa
+        $user = new User;
+        $user->name = $request->vnama;
+        $user->email = $request->vemail;
+        $user->password = Hash::make('123456'); // Set a default password
+        $user->role = 'guru'; // Set role to 'siswa'
+        $user->save();
+
         $karyawan = new karyawan;
         $karyawan->nama = $request->vnama;
         $karyawan->alamat = $request->valamat;
@@ -62,9 +72,10 @@ class KaryawanController extends Controller
         $karyawan->email = $request->vemail;
         $karyawan->pend_akhir = $request->vpend_akhir;
         $karyawan->jabatan_id = $request->jabatan_id; // Simpan id jabatan yang dipilih
+        $karyawan->user_id = $user->id; // Associate the siswa with the user
         $karyawan->save();
 
-        return redirect()->route('KelolaKaryawan')->with('success', 'Data karyawan berhasil ditambahkan');
+        return redirect()->route('KelolaKaryawan')->with('success', 'Data karyawan berhasil ditambahkan dan akun berhasil dibuat');
     }
     public function edit($id)
     {

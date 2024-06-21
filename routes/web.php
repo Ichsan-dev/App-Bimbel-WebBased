@@ -1,9 +1,11 @@
 <?php
 
-
+use App\Http\Controllers\AbsensiGuruController;
 use App\Http\Controllers\AbsensiKaryawanController;
 use App\Http\Controllers\AbsensiSiswaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CekGajiController;
+use App\Http\Controllers\CekJadwalController;
 use App\Http\Controllers\GajiKaryawanController;
 use App\Http\Controllers\HomeControler;
 use App\Http\Controllers\InstrukturController;
@@ -13,8 +15,11 @@ use App\Http\Controllers\JumbotronController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\KelolaAkunController;
 use App\Http\Controllers\KelolaKuisController;
+use App\Http\Controllers\KemajuanSiswaController;
 use App\Http\Controllers\KuisController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\orangtuaController;
+use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\PembayaranSppController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SectionController;
@@ -22,6 +27,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\KursusController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SiswaKursusController;
+use App\Http\Middleware\UserAccess;
 use Illuminate\Support\Facades\Route;
 
 
@@ -43,13 +49,15 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/admin', [AuthController::class, 'admin'])->name('admin')->middleware('userAccess:admin');
         Route::get('/operator', [AuthController::class, 'operator'])->name('operator')->middleware('userAccess:operator');
         Route::get('/calonsiswa', [AuthController::class, 'calonsiswa'])->name('calonsiswa')->middleware('userAccess:calonsiswa');
-        Route::get('/guru/123', [AuthController::class, 'guru'])->name('guru')->middleware('userAccess:guru');
+        Route::get('/guru', [AuthController::class, 'guru'])->name('guru')->middleware('userAccess:guru');
         Route::get('/orangtua', [AuthController::class, 'orangtua'])->name('orangtua')->middleware('userAccess:orantua');
+        Route::get('/owner', [AuthController::class, 'owner'])->name('dashboardowner')->middleware('userAccess:owner');
 
         Route::get('/kuis/sederhana', [KuisController::class, 'kuis'])->name('Quiz')->middleware('userAccess:siswa');
         Route::get('/siswa', [AuthController::class, 'siswa'])->name('siswa')->middleware('userAccess:siswa');
         Route::get('/siswa/kuis', [KuisController::class, 'index'])->name('kuis')->middleware('userAccess:siswa');
-
+        Route::get('siswa/jadwal', [CekJadwalController::class, 'index'])->name('cekjadwal')->middleware('userAccess:siswa');
+        Route::get('siswa/absen', [CekJadwalController::class, 'absen'])->name('cekabsen')->middleware('userAccess:siswa');
 
         Route::get('/admin/kuis', [KelolaKuisController::class, 'index'])->name('KelolaKuis')->middleware('userAccess:admin');
         Route::post('/questions', [KelolaKuisController::class, 'store'])->name('questions.store')->middleware('userAccess:admin');
@@ -141,6 +149,24 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/operator/gajikaryawan', [GajiKaryawanController::class, 'index'])->name('KelolaGaji')->middleware('userAccess:operator');
         Route::post('/operator/gajikaryawan/store', [GajiKaryawanController::class, 'store'])->name('KelolaGajiStore')->middleware('userAccess:operator');
         Route::delete('/operator/gajikaryawan/delete/{id}', [GajiKaryawanController::class, 'delete'])->name('KelolaGajiDelete')->middleware('userAccess:operator');
+
+        Route::get('/guru/absensi', [AbsensiGuruController::class, 'index'])->name('CekAbsen')->middleware('userAccess:guru');
+        Route::get('/guru/gaji', [CekGajiController::class, 'index'])->name('CekGaji')->middleware('userAccess:guru');
+        Route::get('/guru/kemajuansiswa', [KemajuanSiswaController::class, 'index'])->name('KelolaKemajuanSiswa')->middleware('userAccess:guru');
+        Route::post('/guru/kemajuansiswa/store', [KemajuanSiswaController::class, 'store'])->name('KemajuanSiswaStore')->middleware('userAccess:guru');
+        Route::delete('/guru/kemajuansiswa/delete/{id}', [KemajuanSiswaController::class, 'delete'])->name('KemajuanSiswaDelete')->middleware('userAccess:guru');
+        Route::put('/guru/kemajuansiswa/update/{id}', [KemajuanSiswaController::class, 'update'])->name('KemajuanSiswaUpdate')->middleware('userAccess:guru');
+
+        Route::get('/orangtua/Spp', [orangtuaController::class, 'spp'])->name('CekSpp')->middleware('userAccess:orantua');
+        Route::get('/orangtua/KemajuanSiswa', [orangtuaController::class, 'KemajuanSiswa'])->name('CekKemajuanSiswa')->middleware('userAccess:orantua');
+
+        Route::get('/owner/siswa', [OwnerController::class, 'siswa'])->name('laporansiswa')->middleware('userAccess:owner');
+        Route::get('/owner/karyawan', [OwnerController::class, 'karyawan'])->name('laporankaryawan')->middleware('userAccess:owner');
+        Route::get('/owner/spp', [OwnerController::class, 'spp'])->name('laporanspp')->middleware('userAccess:owner');
+        Route::get('/owner/gaji', [OwnerController::class, 'gaji'])->name('laporangaji')->middleware('userAccess:owner');
+        Route::get('/owner', [OwnerController::class, 'index'])->name('dashboardowner')->middleware('userAccess:owner');
+        Route::get('/owner/siswa/aktif', [OwnerController::class, 'siswaAktif'])->name('siswaAktif')->middleware('userAccess:owner');
+        Route::get('/owner/siswa/nonaktif', [OwnerController::class, 'siswaNonAktif'])->name('siswaNonAktif')->middleware('userAccess:owner');
 });
 
 Route::get('/home', function() {

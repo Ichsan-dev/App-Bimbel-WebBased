@@ -44,7 +44,7 @@ class ReviewController extends Controller
 
         Review::create($data);
 
-        return redirect()->route('ReviewWebsite');
+        return redirect()->route('ReviewWebsite')->with('success', 'Data berhasil ditambahkan');
     }
 
     public function update(Request $request, $id)
@@ -77,9 +77,7 @@ class ReviewController extends Controller
         }
 
         $review->update($data);
-        
-
-        return redirect()->route('ReviewWebsite');
+        return redirect()->route('ReviewWebsite')->with('success', 'Data berhasil diperbarui');
     }
     public function destroy($id)
     {
@@ -93,7 +91,7 @@ class ReviewController extends Controller
             $data->delete();
         }
 
-        return redirect()->route('ReviewWebsite');
+        return redirect()->route('ReviewWebsite')->with('success', 'Data berhasil dihapus');
         
     }
 }

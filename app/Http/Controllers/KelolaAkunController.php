@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -11,7 +12,7 @@ class KelolaAkunController extends Controller
 {
     public function index()
     {
-        $dataUser = User::get(); 
+        $dataUser = User::paginate(5);
         return view('poinAkses/admin/KelolaAkun/index', compact('dataUser'));
     }
     public function create()
@@ -36,7 +37,7 @@ class KelolaAkunController extends Controller
 
         User::create($data);
 
-        return redirect()->route('KelolaAkun');
+        return redirect()->route('KelolaAkun')->with('success', 'Data akun berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -47,32 +48,37 @@ class KelolaAkunController extends Controller
 
     public function update(Request $request, $id)
     {
+        // Validasi input
         $validator = Validator::make($request->all(), [
             'vname'     => 'required',
             'vemail'    => 'required|email',
-            'vrole'     => 'required',
-            'vpassword' => 'nullable|min:6',
+            'vrole'     => 'required'
         ]);
 
+        // Jika validasi gagal, kembalikan ke halaman sebelumnya dengan pesan error
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
         }
 
+        // Siapkan data untuk diupdate
         $data = [
             'name'  => $request->vname,
             'email' => $request->vemail,
             'role'  => $request->vrole,
         ];
 
-        // Jika ada perubahan password
-        if ($request->has('vpassword')) {
+        // Jika ada perubahan password dan password tidak kosong
+        if ($request->filled('vpassword')) {
             $data['password'] = Hash::make($request->vpassword);
         }
 
+        // Update data pengguna berdasarkan ID
         User::findOrFail($id)->update($data);
 
-        return redirect()->route('KelolaAkun');
+        // Kembalikan ke halaman KelolaAkun dengan pesan sukses
+        return redirect()->route('KelolaAkun')->with('success', 'Data pengguna berhasil diperbarui.');
     }
+
     
     public function destroy(Request $request, $id)
     {
@@ -82,6 +88,6 @@ class KelolaAkunController extends Controller
             $user->delete();
         }
 
-        return redirect()->route('KelolaAkun');
+        return redirect()->route('KelolaAkun')->with('success', 'Data berhasil dihapus.');
     }
 }

@@ -68,7 +68,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item menu-close">
+          <li class="nav-item menu-open">
             <a href="#" class="nav-link">
               <i class=" nav-icon fas fa-users"></i>
               <p>
@@ -78,7 +78,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('KelolaSiswa')}}" class="nav-link">
+                <a href="{{route('KelolaSiswa')}}" class="nav-link active">
                   <i class="fas fa-users-cog nav-icon"></i>
                   <p>
                     Data Siswa
@@ -152,6 +152,22 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+@endsection
+@section('navlink')
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="/" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{route('operator')}}" class="nav-link">Dashboard</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+          <a href="{{ route('logout') }}" class="nav-link" data-toggle="modal" data-target="#modal-logout">Logout</a>
+      </li>
+    </ul>
 @endsection
 @section('Content')
     <!-- Main content -->
@@ -231,6 +247,13 @@
                     @error('vorangtua')
                         <small>{{ $message }}</small>
                     @enderror
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail">Email orangtua</label>
+                    <input type="text" class="form-control" id="email" placeholder="Cth: 123@abc.com" name="emailortu" value="">
+                      @error('vemail')
+                        <small>{{ $message }}</small>
+                      @enderror
                 </div>
                 <!-- /.form-group -->
                 <div class="form-group">

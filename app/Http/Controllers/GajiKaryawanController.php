@@ -29,8 +29,8 @@ class GajiKaryawanController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         }
 
-        $karyawan   = karyawan::with('jabatan')->findOrFail($request->nama_karyawan);
-        $jabatan    = $karyawan->jabatan;
+        $karyawan   = karyawan::findOrFail($request->nama_karyawan);
+        $jabatan    = Jabatan::findOrFail($karyawan->jabatan_id);
        
         $gaji_pokok = $jabatan->gaji;
         $tunjangan_transport = $jabatan->tunjangan_transport;

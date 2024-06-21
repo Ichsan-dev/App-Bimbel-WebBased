@@ -68,7 +68,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item menu-close">
+          <li class="nav-item menu-open">
             <a href="#" class="nav-link">
               <i class=" nav-icon fas fa-users"></i>
               <p>
@@ -78,7 +78,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('KelolaSiswa')}}" class="nav-link">
+                <a href="{{route('KelolaSiswa')}}" class="nav-link active">
                   <i class="fas fa-users-cog nav-icon"></i>
                   <p>
                     Data Siswa
@@ -153,13 +153,29 @@
     <!-- /.sidebar -->
   </aside>
 @endsection
+@section('navlink')
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="/" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{route('operator')}}" class="nav-link">Dashboard</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+          <a href="{{ route('logout') }}" class="nav-link" data-toggle="modal" data-target="#modal-logout">Logout</a>
+      </li>
+    </ul>
+@endsection
 @section('Content')
     <!-- Main content -->
     <div class="content">
       <!-- SELECT2 EXAMPLE -->
       <div class="card card-success">
           <div class="card-header">
-            <h3 class="card-title">Edit Siswa Form</h3>
+            <h3 class="card-title">Add New Siswa Form</h3>
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse">
                 <i class="fas fa-minus"></i>
@@ -171,7 +187,7 @@
           </div>
           <!-- /.card-header -->
         <div class="card-body">
-            <form action="{{route('SiswaUpdate', $datasiswa->id)}}" method="POST" enctype="multipart/form-data"  id="formSiswa"> 
+           <form action="{{route('SiswaUpdate', $datasiswa->id)}}" method="POST" enctype="multipart/form-data"  id="formSiswa"> 
               @csrf
               @method('PUT')
             <div class="row">
@@ -185,15 +201,14 @@
                 </div>
                 <!-- /.form-group -->
                 <div class="form-group">
-                    <label for="kursus_id">Kursus:</label>
+                  <label>Kursus :</label>
                     <select name="kursus_id" class="form-control" id="kursus_id">
-                        <option disabled value="">-- Pilih Kursus --</option>
+                      <option disabled value="">-- Pilih Kursus --</option>
                         @foreach ($datakursus as $item)
                             <option value="{{ $item->id }}" {{ $item->id == $datasiswa->kursus_id ? 'selected' : '' }}>{{ $item->nama_kursus }}</option>
                         @endforeach
                     </select>
                 </div>
-
                 <!-- /.form-group -->
                 <div class="form-group">
                     <label for="exampleInputJenisKelamin">Jenis Kelamin :</label>
@@ -213,7 +228,7 @@
                   <label for="exampleInputNoHp">No. Handphone</label>
                   <input type="text" class="form-control" id="no_telp" placeholder="Cth: 0877xxx" name="vno_telp" value="{{$datasiswa->no_telp}}">
                     @error('vno_telp')
-                      <small>{{ $message }}</small>}}
+                      <small>{{ $message }}</small>
                     @enderror
                 </div>
                 <div class="form-group">
@@ -222,6 +237,15 @@
                       @error('vemail')
                         <small>{{ $message }}</small>
                       @enderror
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputStatus">Status</label>
+                    <select class="form-control" name="status">
+                      <option disabled value="">-- Pilih --</option>
+                      <option value="active" {{$datasiswa->status == 'active' ? 'selected' : ''}}>Aktif</option>
+                      <option value="inactive" {{$datasiswa->status == 'inactive' ? 'selected' : ''}}>Tidak Aktif</option>
+                      <option value="pending" {{$datasiswa->status == 'pending' ? 'selected' : ''}}>Pending</option>
+                    </select>
                 </div>
               </div>
               <!-- /.col -->
@@ -240,15 +264,6 @@
                   <input type="date" name="vtgl" class="form-control" id="vtgl" value="{{$datasiswa->tgl_lahir}}">
                 </div>
                 <!-- /.form-group -->
-                 <div class="form-group">
-                  <label for="exampleInputStatus">Status</label>
-                    <select class="form-control" name="status">
-                      <option disabled value="">-- Pilih --</option>
-                      <option value="active" {{$datasiswa->status == 'active' ? 'selected' : ''}}>Aktif</option>
-                      <option value="inactive" {{$datasiswa->status == 'inactive' ? 'selected' : ''}}>Tidak Aktif</option>
-                      <option value="pending" {{$datasiswa->status == 'pending' ? 'selected' : ''}}>Pending</option>
-                    </select>
-                </div>
                 <div class="form-group">
                   <label for="exampleInputKomentar">Alamat</label>
                     <textarea name="valamat" id="alamat" class="form-control">{{$datasiswa->alamat}}</textarea>
@@ -259,7 +274,7 @@
                 <div class="form-group">
                   <label for="image">Foto </label>
                     <input type="file" name="vfoto" id="image" class="form-control-file">
-                      <img src="{{ asset('storage/fotosiswa/'.$datasiswa->foto)}}" alt="Current Image" style="max-width: 200px;">
+                       <img src="{{ asset('storage/fotosiswa/'.$datasiswa->foto)}}" alt="Current Image" style="max-width: 200px;">
                 </div>
               </div>
               <!-- /.col -->

@@ -46,7 +46,7 @@ class JumbotronController extends Controller
         $jumbotron->update($data);
         
 
-        return redirect()->route('JumbotronWebsite');
+        return redirect()->route('JumbotronWebsite')->with('success', 'Data Berhasil dirubah');
     }
 
 }

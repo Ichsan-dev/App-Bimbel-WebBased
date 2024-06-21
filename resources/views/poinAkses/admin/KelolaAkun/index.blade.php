@@ -1,3 +1,26 @@
+<style>
+  /* Custom styles for pagination */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination .page-link {
+    padding: 10px 15px;
+}
+
+.pagination .page-item {
+    display: inline-block;
+}
+
+/* Prevent images inside pagination links from being too large */
+.pagination img {
+    max-width: 20px;
+    height: auto;
+}
+
+</style>
 @extends('Layout-Dashboard.main')
 @section('NavAccount')
     <!-- Sidebar -->
@@ -87,6 +110,22 @@
     <!-- /.sidebar -->
   </aside>
 @endsection
+@section('navlink')
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="/" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{route('admin')}}" class="nav-link">Dashboard</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+          <a href="{{ route('logout') }}" class="nav-link" data-toggle="modal" data-target="#modal-logout">Logout</a>
+      </li>
+    </ul>
+@endsection
 @section('Content')
     <!-- Main content -->
     <div class="content">
@@ -109,9 +148,9 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($dataUser as $item)                          
+                    @foreach ($dataUser as $index => $item)                          
                       <tr>
-                        <td>{{$loop->iteration}}</td>
+                        <td>{{ $dataUser->firstItem() + $index }}</td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->email}}</td>
                         <td>{{$item->role}}</td>
@@ -152,10 +191,21 @@
                       @endforeach
                   </tbody>
                 </table>
+                <div class="pagination-container">
+                    {{ $dataUser->links('pagination::bootstrap-4') }}
+                </div>
               </div>
               <!-- /.card-body -->
             </div>
       </div><!-- /.container-fluid -->
+         @if ($message = Session::get('success'))
+            <script>
+                Swal.fire({
+                    icon: "success",
+                    text: "{{ $message }}",
+                });
+            </script>
+        @endif
     </div>
     <!-- /.content -->
 @endsection

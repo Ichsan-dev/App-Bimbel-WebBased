@@ -49,7 +49,7 @@ class SectionController extends Controller
 
         Section::create($data);
 
-        return redirect()->route('SectionWebsite');
+        return redirect()->route('SectionWebsite')->with('success', 'Data Berhasil disimpan.');
     }
 
     public function edit($id)
@@ -94,7 +94,7 @@ class SectionController extends Controller
 
         $section->update($data);
 
-        return redirect()->route('SectionWebsite');
+        return redirect()->route('SectionWebsite')->with('success', 'Data berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -109,7 +109,7 @@ class SectionController extends Controller
             $data->delete();
         }
 
-        return redirect()->route('SectionWebsite');
+        return redirect()->route('SectionWebsite')->with('success', 'Data berhasil dihapus');
         
     }
 }

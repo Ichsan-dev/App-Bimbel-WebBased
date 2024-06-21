@@ -68,7 +68,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item menu-close">
+          <li class="nav-item menu-open">
             <a href="#" class="nav-link">
               <i class=" nav-icon fas fa-users"></i>
               <p>
@@ -94,7 +94,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('KelolaJadwal')}}" class="nav-link">
+                <a href="{{route('KelolaJadwal')}}" class="nav-link active">
                 <i class="fas fa-calendar-alt nav-icon"></i>
                   <p>
                     Jadwal Siswa
@@ -152,6 +152,22 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+@endsection
+@section('navlink')
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="/" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{route('operator')}}" class="nav-link">Dashboard</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+          <a href="{{ route('logout') }}" class="nav-link" data-toggle="modal" data-target="#modal-logout">Logout</a>
+      </li>
+    </ul>
 @endsection
 @section('Content')
     <!-- Main content -->
