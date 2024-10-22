@@ -12,7 +12,12 @@
   <link rel="stylesheet" href="{{asset('AdminLTE/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('AdminLTE/dist/css/adminlte.min.css')}}">
+  <link rel="stylesheet" href="{{asset('AdminLTE/Style/paginate.css')}}">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <!-- Select2 JavaScript -->
+  <link rel="icon" type="image/png" href="{{ asset('halaman_auth/images/icons/logopalsu.ico') }}" />
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -78,23 +83,17 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-      <img src="{{asset('AdminLTE/logo/Logo1.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="{{asset('Halaman-depan/assets/newlogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Bimbel Rumah Pinus</span>
     </a>
 
     @yield('NavAccount')
 
     
-         <!-- Content Wrapper. Contains page content -->
+<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          @yield('sksd')
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
+   @yield('sksd')
     <!-- /.content-header -->
 
     @yield('Content')
@@ -117,10 +116,13 @@
 
 <!-- jQuery -->
 <script src="{{asset('AdminLTE/plugins/jquery/jquery.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <!-- Bootstrap 4 -->
 <script src="{{asset('AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('AdminLTE/dist/js/adminlte.min.js')}}"></script>
 <script src="{{asset('master-quiz/index.js')}}"></script>
+<script src="{{asset('jquery/index.js')}}"></script>
 </body>
 </html>

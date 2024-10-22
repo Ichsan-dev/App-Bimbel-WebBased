@@ -1,8 +1,16 @@
 @extends('Layout-Dashboard.main')
 @section('sksd')
-          <div class="col-sm-6">
-            <h1>Selamat Datang di Halaman Operator :)</h1>
+<div class="content-header" style="height: 70vh; display: flex; justify-content: center; align-items: center;">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12" style="text-align: center;">
+            <img src="{{asset('Halaman-depan/assets/newlogo.png')}}" width="400px" alt="">
+            <h1>Selamat Datang di Halaman Operator</h1>
+            <p>"Mengasah Potensi Menyongsong Masa Depan Gemilang."</p>
           </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
 @endsection
 @section('NavAccount')
 
@@ -11,7 +19,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="{{asset('Halaman-depan/assets/user.png')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name}}</a>

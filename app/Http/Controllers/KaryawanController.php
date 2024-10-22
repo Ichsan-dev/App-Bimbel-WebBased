@@ -37,7 +37,6 @@ class KaryawanController extends Controller
         $jabatan = Jabatan::all(); // Ambil semua data jabatan dari model Jabatan
         return view('poinAkses/operator/KelolaKaryawan/create', ['jabatan' => $jabatan]); // Kirim data jabatan ke view
     }
-
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -54,7 +53,6 @@ class KaryawanController extends Controller
         if($validator->fails()) {     
             return redirect()->back()->withInput()->withErrors($validator);
         }
-
         // Create a new User account for the Siswa
         $user = new User;
         $user->name = $request->vnama;

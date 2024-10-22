@@ -97,8 +97,9 @@ class SiswaController extends Controller
         }
 
         $siswa->save();
-
         return redirect()->route('KelolaSiswa')->with('success', 'Data berhasil ditambahkan dan akun siswa berhasil dibuat');
+
+        
     }
 
 

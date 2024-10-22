@@ -10,7 +10,7 @@ class KelolaKuisController extends Controller
     // Menampilkan semua pertanyaan
     public function index()
     {
-        $questions = Question::all();
+        $questions = Question::paginate(5);
         return view('poinAkses/admin/KelolaKuis/index', compact('questions'));
     }
 

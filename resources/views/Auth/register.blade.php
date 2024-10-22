@@ -110,7 +110,7 @@
                 </form>
 
                 <div class="login100-more"
-                    style="background-image: url('{{ asset('halaman_auth/images/bg-01.png') }}');">
+                    style="background-image: url('{{ asset('halaman_auth/images/bg-02.jpg') }}');">
                 </div>
             </div>
         </div>

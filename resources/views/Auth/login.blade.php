@@ -43,7 +43,6 @@
                     <span class="login100-form-title p-b-43">
                         Login to continue
                     </span>
-
                     @if (Session::get('gagal'))
                         <div class="alert alert-danger alert-dismissible fade show">
                             <ul>
@@ -51,27 +50,16 @@
                             </ul>
                         </div>
                     @endif
-                    {{-- @if (Session::get('success'))
-                        <div class="alert alert-success alert-dismissible fade show">
-                            <ul>
-                                <li>{{ Session::get('success') }}</li>
-                            </ul>
-                        </div>
-                    @endif --}}
-
                     <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                         <input class="input100" type="text" name="email" value="{{ old('email') }}">
                         <span class="focus-input100"></span>
                         <span class="label-input100">Email</span>
                     </div>
-
-
                     <div class="wrap-input100 validate-input" data-validate="Password is required">
                         <input class="input100" type="password" name="password">
                         <span class="focus-input100"></span>
                         <span class="label-input100">Password</span>
                     </div>
-
                     <div class="flex-sb-m w-full p-t-3 p-b-32">
                         <div class="contact100-form-checkbox">
                             <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
@@ -79,20 +67,17 @@
                                 Remember me
                             </label>
                         </div>
-
                         <div>
                             <a href="#" class="txt1">
                                
                             </a>
                         </div>
                     </div>
-
                     <div class="container-login100-form-btn">
                         <button class="login100-form-btn" type="submit">
                             Login
                         </button>
                     </div>
-
                     <div class="text-center p-t-46 p-b-20">
                         <p>Don't have an account?
                             <span class="txt2">
@@ -100,13 +85,11 @@
                             </span>
                         </p>
                     </div>
-
                     <div class="login100-form-social flex-c-m">
                     </div>
                 </form>
-
                 <div class="login100-more"
-                    style="background-image: url('{{ asset('halaman_auth/images/bg-01.png') }}');">
+                    style="background-image: url('{{ asset('halaman_auth/images/bg-02.jpg') }}');">
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="{{asset('Halaman-depan/assets/user.png')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name}}</a>
@@ -124,9 +124,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($questions as $question)
+                        @foreach ($questions as $index => $question)
                             <tr>
-                                <th scope="row">{{ $loop->iteration }}</th>
+                                <th scope="row">{{ $questions->firstItem() + $index }}</th>
                                 <td>{{ $question->question }}</td>
                                 <td>{{ $question->answers[$question->correct_answer - 1] }}</td>
                                 <td>
@@ -215,6 +215,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                  <div class="pagination-container">
+                    {{ $questions->links('pagination::bootstrap-4') }}
+                </div>
               </div>
               <!-- /.card-body -->
             </div>

@@ -6,7 +6,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="{{asset('Halaman-depan/assets/user.png')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name}}</a>
@@ -50,6 +50,14 @@
              <i class="fas fa-puzzle-piece nav-icon"></i>
               <p>
                 Kuis
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('resetpassword')}}" class="nav-link">
+            <i class="fas fa-unlock-alt nav-icon"></i>
+              <p>
+                Reset Password
               </p>
             </a>
           </li>

@@ -6,7 +6,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="{{asset('Halaman-depan/assets/user.png')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name}}</a>
@@ -162,7 +162,7 @@
                                           <div class="modal-body">
                                               <div class="form-group">
                                                   <label for="exampleInputSiswa">Nama Siswa</label>
-                                                  <select name="nama_siswa" class="form-control" id="nama_siswa">
+                                                  <select name="nama_siswa" class="form-control option-nama-siswa" id="option_nama_siswa">
                                                       <option disabled value="">-- Pilih Siswa --</option>
                                                       @foreach($datasiswa as $s)
                                                       <option value="{{ $s->id }}" @if($s->id == $item->siswa_id) selected @endif>{{ $s->nama }}</option>

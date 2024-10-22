@@ -6,6 +6,7 @@ use App\Http\Controllers\AbsensiSiswaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CekGajiController;
 use App\Http\Controllers\CekJadwalController;
+use App\Http\Controllers\ForumulirPendaftaran;
 use App\Http\Controllers\GajiKaryawanController;
 use App\Http\Controllers\HomeControler;
 use App\Http\Controllers\InstrukturController;
@@ -38,11 +39,16 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'LandingPage/index');
 Route::get('/dashboard', [HomeControler::class, 'index'])->name('dashboard');
 
+
 Route::middleware(['guest'])->group(function(){
         Route::get('/login', [LoginController::class, 'login'])->name('login');
         Route::post('/login-proses', [LoginController::class, 'login_proses'])->name('login-proses');
         Route::get('/register', [LoginController::class, 'register'])->name('register');
         Route::post('/register-proses', [LoginController::class, 'register_proses'])->name('register-proses');
+
+        Route::get('Formulir/Pendaftaran', [ForumulirPendaftaran::class, 'index'])->name('formulirpendaftaran');
+        Route::post('Formulir/Cetak', [ForumulirPendaftaran::class, 'cetak'])->name('formulircetak');
+
 });
 Route::middleware(['auth'])->group(function(){
         Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -58,6 +64,8 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/siswa/kuis', [KuisController::class, 'index'])->name('kuis')->middleware('userAccess:siswa');
         Route::get('siswa/jadwal', [CekJadwalController::class, 'index'])->name('cekjadwal')->middleware('userAccess:siswa');
         Route::get('siswa/absen', [CekJadwalController::class, 'absen'])->name('cekabsen')->middleware('userAccess:siswa');
+        Route::get('siswa/reset/password', [CekJadwalController::class, 'resetpass'])->name('resetpassword')->middleware('userAccess:siswa');
+        Route::post('siswa/password/update', [CekJadwalController::class, 'updatepass'])->name('updatepassword')->middleware('userAccess:siswa');
 
         Route::get('/admin/kuis', [KelolaKuisController::class, 'index'])->name('KelolaKuis')->middleware('userAccess:admin');
         Route::post('/questions', [KelolaKuisController::class, 'store'])->name('questions.store')->middleware('userAccess:admin');
@@ -156,9 +164,12 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/guru/kemajuansiswa/store', [KemajuanSiswaController::class, 'store'])->name('KemajuanSiswaStore')->middleware('userAccess:guru');
         Route::delete('/guru/kemajuansiswa/delete/{id}', [KemajuanSiswaController::class, 'delete'])->name('KemajuanSiswaDelete')->middleware('userAccess:guru');
         Route::put('/guru/kemajuansiswa/update/{id}', [KemajuanSiswaController::class, 'update'])->name('KemajuanSiswaUpdate')->middleware('userAccess:guru');
+        Route::get('/guru/cetak/gaji', [CekGajiController::class, 'cetak'])->name('CetakGaji')->middleware('userAccess:guru');
 
         Route::get('/orangtua/Spp', [orangtuaController::class, 'spp'])->name('CekSpp')->middleware('userAccess:orantua');
         Route::get('/orangtua/KemajuanSiswa', [orangtuaController::class, 'KemajuanSiswa'])->name('CekKemajuanSiswa')->middleware('userAccess:orantua');
+        Route::get('/orangtua/resetpassword', [orangtuaController::class, 'ResetPassword'])->name('ResetPassword')->middleware('userAccess:orantua');
+        Route::post('/orangtua/updatepassword', [orangtuaController::class, 'UpdatePassword'])->name('UpdatePassword')->middleware('userAccess:orantua');
 
         Route::get('/owner/siswa', [OwnerController::class, 'siswa'])->name('laporansiswa')->middleware('userAccess:owner');
         Route::get('/owner/karyawan', [OwnerController::class, 'karyawan'])->name('laporankaryawan')->middleware('userAccess:owner');
@@ -172,11 +183,3 @@ Route::middleware(['auth'])->group(function(){
 Route::get('/home', function() {
     return redirect('/');
 });
-
-
-
-
-
-
-
-

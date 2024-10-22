@@ -71,7 +71,7 @@
                 <h1 class="text-white fw-bold">{{$item->title}}</h1>
                 <p class="text-white pt-4">
                   {{$item->description}}</p>
-                <a href="{{ route('register') }}" class="btn mt-5 nav-link cta" style="color: white;">Daftar</a>
+                <a href="{{ route('formulirpendaftaran') }}" class="btn mt-5 nav-link cta" style="color: white;">Daftar</a>
               </div>
               <div class="col-12 col-lg-6">
                 <div class="d-flex justify-content-end">
