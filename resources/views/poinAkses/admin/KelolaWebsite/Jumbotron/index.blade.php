@@ -129,7 +129,7 @@
                         <td>{{$loop->iteration}}</td>
                         <td>{{$item->title}}</td>
                         <td>{{$item->description}}</td>
-                        <td style="text-align: center"><img src="{{ asset('storage/jumbotron/'.$item->image)}}" alt="" width="70px"></td>
+                        <td style="text-align: center"><img src="{{asset('storage/jumbotron/'.$item->image)}}" alt="" width="70px"></td>
                         <td style="Display: flex; justify-content: center; align-items:center; border: none;">
                                 <a data-toggle="modal" data-target="#modal-edit{{$item->id}}" class="btn-sm btn-warning"><i class="fas fa-pen"></i></a>
                         </td>

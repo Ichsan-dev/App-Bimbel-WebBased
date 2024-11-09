@@ -1,0 +1,6 @@
+Setelah mencoba beberapa solusi saya memperbaikinya
+
+1. hapus tautan simbolik
+
+2. membangun kembali tautan simbolik "php artisan storage:link"
+

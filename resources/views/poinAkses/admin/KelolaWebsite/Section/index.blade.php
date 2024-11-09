@@ -130,7 +130,7 @@
                         <td>{{$loop->iteration}}</td>
                         <td>{{$item->content}}</td>
                         <td>{{$item->title}}</td>
-                        <td style="text-align: center"><img src="{{ asset('storage/photo-user/'.$item->thumbnail)}}" alt="" width="70px"></td>
+                        <td style="text-align: center"><img src="{{asset('storage/photo-user/'.$item->thumbnail)}}" alt="" width="70px"></td>
                         <td style="Display: flex; justify-content: center; align-items:center; border: none;">
                                 <a href="{{Route('SectionEdit', ['id' => $item->id])}}" class="btn-sm btn-warning mr-2"><i class="fas fa-pen mr-1"></i></a>
                                 <a data-toggle="modal" data-target="#modal-hapus{{ $item->id }}" class="btn-sm btn-danger"><i class="fas fa-trash-alt mr-1"></i></a>
